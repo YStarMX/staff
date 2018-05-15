@@ -70,5 +70,41 @@ public class UserDao {
 				new Object[] { user.getName(), user.getAge(), user.getPhone(),
 						user.getAddress(), user.getRole() });
 	}
+	
+	public List<UserVo> allUsers(UserVo user) {
+		String sqlStr = " SELECT * FROM user WHERE 1=1 ";
+		if (user.getId() != null && !user.getId().isEmpty()) {
+			sqlStr += " and id = " + user.getId();
+		}
+		if (user.getName() != null && !user.getName().isEmpty()) {
+			sqlStr += " and name like '%" + user.getName() + "%'";
+		}
+		if (user.getAge() != null && !user.getAge().isEmpty()) {
+			sqlStr += " and age = " + user.getAge();
+		}
+		if (user.getPhone() != null && !user.getPhone().isEmpty()) {
+			sqlStr += " and phone like '%" + user.getPhone() + "%'";
+		}
+		if (user.getAddress() != null && !user.getAddress().isEmpty()) {
+			sqlStr += " and address like '%" + user.getAddress() + "%'";
+		}
+		if (user.getRole() != null && !user.getRole().isEmpty()) {
+			sqlStr += " and role = '" + user.getRole() + "'";
+		}
+		final List<UserVo> userList = new ArrayList<UserVo>();
+		jdbcTemplate.query(sqlStr, new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				UserVo user = new UserVo();
+				user.setId(rs.getString("id"));
+				user.setName(rs.getString("name"));
+				user.setAge(rs.getString("age"));
+				user.setPhone(rs.getString("phone"));
+				user.setAddress(rs.getString("address"));
+				user.setRole(rs.getString("role"));
+				userList.add(user);
+			}
+		});
+		return userList;
+	}
 
 }

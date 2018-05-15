@@ -51,4 +51,12 @@ public class UserAction {
 		return "forward:index";
 	}
 	
+	@RequestMapping(value = "/qryUser.htm")
+	public String qryUser(Model model, UserVo user) {
+		List<UserVo> userList = userService.allUsers(user);
+		model.addAttribute("userList", userList);
+		model.addAttribute("user", user);
+		return "index";
+	}
+	
 }

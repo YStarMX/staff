@@ -32,5 +32,9 @@ public class UserService {
 	public void addUser(UserVo user) {
 		userDao.addUser(user);
 	}
+	
+	public List<UserVo> allUsers(UserVo user) {
+		return userDao.allUsers(user);
+	}
 
 }
