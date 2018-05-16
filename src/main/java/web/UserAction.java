@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import service.UserService;
+import vo.User;
 import domain.UserVo;
 
 @Controller
@@ -22,7 +24,7 @@ public class UserAction {
 	}
 
 	@RequestMapping(value = "/delUser.htm")
-	public String delUser(Model model, String id) {
+	public String delUser(Model model, Integer id) {
 		userService.delUser(id);
 		return "forward:index";
 	}
@@ -35,7 +37,7 @@ public class UserAction {
 	}
 
 	@RequestMapping(value = "/modUser.htm")
-	public String modUser(Model model, UserVo user) {
+	public String modUser(Model model, User user) {
 		userService.modUser(user);
 		return "forward:index";
 	}
