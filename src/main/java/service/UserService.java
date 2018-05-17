@@ -18,8 +18,9 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public List<UserVo> allUsers() {
-		return userDao.allUsers();
+	public List<User> allUsers() {
+//		return userDao.allUsers();
+		return userMapper.getAllUser();
 	}
 
 	public void delUser(Integer id) {
@@ -27,8 +28,9 @@ public class UserService {
 		userMapper.deleteByPrimaryKey(id);
 	}
 
-	public UserVo getUser(String id) {
-		return userDao.getUser(id);
+	public User getUser(Integer id) {
+//		return userDao.getUser(id);
+		return userMapper.selectByPrimaryKey(id);
 	}
 
 	public void modUser(User user) {
@@ -36,12 +38,14 @@ public class UserService {
 		userMapper.updateByPrimaryKeySelective(user);
 	}
 
-	public void addUser(UserVo user) {
-		userDao.addUser(user);
+	public void addUser(User user) {
+//		userDao.addUser(user);
+		userMapper.insert(user);
 	}
 
-	public List<UserVo> allUsers(UserVo user) {
-		return userDao.allUsers(user);
+	public List<User> getUserSelective(User user) {
+//		return userDao.allUsers(user);
+		return userMapper.getUserSelective(user);
 	}
 
 }

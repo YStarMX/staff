@@ -18,7 +18,7 @@ public class UserAction {
 
 	@RequestMapping(value = "/index")
 	public String index(Model model) {
-		List<UserVo> userList = userService.allUsers();
+		List<User> userList = userService.allUsers();
 		model.addAttribute("userList", userList);
 		return "index";
 	}
@@ -30,8 +30,8 @@ public class UserAction {
 	}
 
 	@RequestMapping(value = "/toModUser.htm")
-	public String toModUser(Model model, String id) {
-		UserVo user = userService.getUser(id);
+	public String toModUser(Model model, Integer id) {
+		User user = userService.getUser(id);
 		model.addAttribute("user", user);
 		return "modUser";
 	}
@@ -48,14 +48,14 @@ public class UserAction {
 	}
 	
 	@RequestMapping(value = "/addUser.htm")
-	public String addUser(Model model, UserVo user) {
+	public String addUser(Model model, User user) {
 		userService.addUser(user);
 		return "forward:index";
 	}
 	
 	@RequestMapping(value = "/qryUser.htm")
-	public String qryUser(Model model, UserVo user) {
-		List<UserVo> userList = userService.allUsers(user);
+	public String qryUser(Model model, User user) {
+		List<User> userList = userService.getUserSelective(user);
 		model.addAttribute("userList", userList);
 		model.addAttribute("user", user);
 		return "index";

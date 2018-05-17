@@ -2,6 +2,8 @@ package mapper;
 
 import vo.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    List<User> getAllUser();
+    
+    List<User> getUserSelective(User record);
 }
