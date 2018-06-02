@@ -91,14 +91,14 @@
 		  </TR>
 		  <#if userList??>
 		  <#list userList as user>
-		  <TR align="center">
+		  <TR align="center" id="${user.id}">
 		    <TD>${user.id}</TD>
 		    <TD>${user.name}</TD>
 		    <TD>${user.age}</TD>
 		    <TD>${user.phone}</TD>
 		    <TD>${user.address}</TD>
 		    <TD>${user.role}</TD>
-		    <TD><A href="delUser.htm?id=${user.id}">删除</A>&nbsp;
+		    <TD><A href="javascript:void(0);" onclick="delUser(${user.id})">删除</A>&nbsp;
 		        <A href="toModUser.htm?id=${user.id}">修改</A>
 		    </TD>
 		  </TR>
@@ -111,3 +111,12 @@
 </div>
 </body>
 </html>
+<script>
+function delUser(id) {
+	$.post("delUser.json", {
+		id : id
+	}, function(data, status) {
+		$("#" + id).remove();
+	});
+}
+</script>
